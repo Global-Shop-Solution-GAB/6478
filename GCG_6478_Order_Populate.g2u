@@ -1,0 +1,84 @@
+Program.Sub.Preflight.Start
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String,"")
+
+F.Intrinsic.Control.SelectCase(V.Caller.Hook)
+	F.Intrinsic.Control.Case(11560)
+		V.Passed.000203.Set("Prog Bill")
+		F.Intrinsic.Control.CallSub(Exit)
+	
+	F.Intrinsic.Control.Case(15226)
+		F.Intrinsic.Control.CallSub(Get_Sales_Hist)
+		F.Intrinsic.Control.CallSub(Exit)
+	
+	F.Intrinsic.Control.Case(38130)
+		'cleaning up GCG_6478_Prior_Prog
+		F.ODBC.Connection!Con.OpenCompanyConnection
+		F.ODBC.Connection!Con.Execute("Delete From GCG_6478_Prior_Prog Where Order_No Not In(Select Order_No From V_Order_Header)")
+		F.ODBC.Connection!Con.Close
+		
+	F.Intrinsic.Control.CaseElse
+		F.Intrinsic.Control.CallSub(Exit)
+		
+F.Intrinsic.Control.EndSelect
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	F.Intrinsic.String.Build("Project: GCG_6478_Order_Populate.g2u {0}{0}Subroutine: {1}{0}Error Occurred {2} with description {3}",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Exit)
+Function.Intrinsic.Control.EndIf
+Program.Sub.Main.End
+
+Program.Sub.Exit.Start
+F.Intrinsic.Control.SetErrorHandler("Exit_Err")
+F.Intrinsic.Control.ClearErrors
+
+F.Intrinsic.Control.End
+
+F.Intrinsic.Control.Label("Exit_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	F.Intrinsic.Control.End
+Function.Intrinsic.Control.EndIf
+Program.Sub.Exit.End
+
+Program.Sub.Get_Sales_Hist.Start
+F.Intrinsic.Control.SetErrorHandler("Get_Sales_Hist_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String,"")
+V.Local.sSql.Declare(String,"")
+V.Local.i.Declare(Long,0)
+
+F.ODBC.Connection!Con.OpenCompanyConnection
+F.Intrinsic.String.Build("Select Distinct Invc, Order_Num From AR_Batch_Trans Where Batch = '{0}'",V.Passed.Batch.Trim,V.Local.sSql)
+
+F.Data.DataTable.CreateFromSQL("Batch","con",V.Local.sSql,True)
+
+F.Intrinsic.Control.For(v.Local.i,0,V.DataTable.Batch.RowCount--,1)
+	F.Intrinsic.String.Build("Select INVOICE, A.ORDER_NO, Prog_Line, B.Record_No, A.Part, Percentage, Bill_Amt, AR_Account From V_ORDER_HIST_LINE A JOIN GCG_6478_Prior_Prog B on A.ORDER_NO = B.ORDER_NO and A.ORDER_LINE = B.Prog_Line Where INVOICE = '{0}' and A.ORDER_NO = '{1}'",V.DataTable.Batch(V.Local.i).Invc!FieldValtrim,V.DataTable.Batch(V.Local.i).Order_Num!FieldValtrim,V.Local.sSql)
+	F.Data.DataTable.CreateFromSQL("INVCHIST","Con",V.Local.sSql,True)
+	F.Data.DataTable.SaveToDB("INVCHIST","con","GCG_6478_HPrior_Prog"," ",128,"INVOICE@!@INVOICE*!*ORDER_NO@!@ORDER_NO*!*Prog_Line@!@Prog_Line*!*Record_No@!@Record_No*!*Part@!@Part*!*Percentage@!@Percentage*!*Bill_Amt@!@Bill_Amt*!*AR_Account@!@AR_Account")
+	F.Data.DataTable.Close("INVCHIST")
+F.Intrinsic.Control.Next(V.Local.i)
+
+F.ODBC.Connection!Con.Close
+
+F.Data.DataTable.Close("Batch")
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Get_Sales_Hist_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	F.Intrinsic.String.Build("Project: GCG_6478_Order_Populate.g2u {0}{0}Subroutine: {1}{0}Error Occurred {2} with description {3}",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Exit)
+Function.Intrinsic.Control.EndIf
+Program.Sub.Get_Sales_Hist.End
