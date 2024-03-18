@@ -1,0 +1,1328 @@
+Program.Sub.ScreenSU.Start
+Gui.Form..Create(BaseForm)
+Gui.Form..Caption("Progress Billing Worksheet")
+Gui.Form..Size(1100,720)
+Gui.Form..MinX(0)
+Gui.Form..MinY(0)
+Gui.Form..Position(0,0)
+Gui.Form..AlwaysOnTop(False)
+Gui.Form..FontName("Tahoma")
+Gui.Form..FontSize(8.25)
+Gui.Form..ControlBox(True)
+Gui.Form..MaxButton(True)
+Gui.Form..MinButton(True)
+Gui.Form..MousePointer(0)
+Gui.Form..Moveable(True)
+Gui.Form..Sizeable(True)
+Gui.Form..ShowInTaskBar(True)
+Gui.Form..TitleBar(True)
+Gui.Form..Event(UnLoad,Form_UnLoad)
+Gui.Form.lblOrder.Create(Label,"Order:",True,32,13,0,40,18,True,0,"Tahoma",8.25,,0,0)
+Gui.Form.lblOrder.BorderStyle(0)
+Gui.Form.txtOrder.Create(TextBox,"",True,100,20,0,74,15,True,0,"Tahoma",8.25,,1)
+Gui.Form.txtOrder.Event(LostFocus,txtOrder_LostFocus)
+Gui.Form.txtOrder.Event(GotFocus,txtOrder_GotFocus)
+Gui.Form.txtOrder.MaxLength(7)
+Gui.Form.lblProject.Create(Label,"Project ID:",True,52,13,0,586,18,True,0,"Tahoma",8.25,,0,0)
+Gui.Form.lblProject.BorderStyle(0)
+Gui.Form.txtProject.Create(TextBox,"",True,100,20,0,653,15,True,0,"Tahoma",8.25,,1)
+Gui.Form.txtProject.MaxLength(7)
+Gui.Form.txtProject.Locked(True)
+Gui.Form.txtProjectName.Create(TextBox,"",True,302,20,0,653,41,True,0,"Tahoma",8.25,,1)
+Gui.Form.txtProjectName.MaxLength(30)
+Gui.Form.txtProjectName.Locked(True)
+Gui.Form.tab1.Create(Tab)
+Gui.Form.tab1.Enabled(True)
+Gui.Form.tab1.Visible(True)
+Gui.Form.tab1.Zorder(0)
+Gui.Form.tab1.Size(1098,589)
+Gui.Form.tab1.Position(0,99)
+Gui.Form.tab1.FontName("Tahoma")
+Gui.Form.tab1.FontSize(8.25)
+Gui.Form.tab1.Anchor(15)
+Gui.Form.tab1.Tabs(2)
+Gui.Form.tab1.SetTab(0)
+Gui.Form.tab1.Caption("Generate Progress Billings")
+Gui.Form.tab1.SetTab(1)
+Gui.Form.tab1.Caption("Progress Bill Detail History")
+Gui.Form.txtPrecentBill.Create(TextBox,"",True,32,20,0,263,13,True,1,"Tahoma",8.25,,1)
+Gui.Form.txtPrecentBill.Parent("tab1",0)
+Gui.Form.txtPrecentBill.NumericOnly(2)
+Gui.Form.txtPrecentBill.Event(GotFocus,txtPrecentBill_GotFocus)
+Gui.Form.txtPrecentBill.Event(LostFocus,txtPrecentBill_LostFocus)
+Gui.Form.txtTotInvoice.Create(TextBox,"",True,59,20,0,627,13,True,1,"Tahoma",8.25,,1)
+Gui.Form.txtTotInvoice.Parent("tab1",0)
+Gui.Form.txtTotInvoice.NumericOnly(1)
+Gui.Form.txtTotInvoice.Event(GotFocus,txtTotInvoice_GotFocus)
+Gui.Form.txtTotInvoice.Event(LostFocus,txtTotInvoice_LostFocus)
+Gui.Form.txtItem.Create(TextBox,"",True,212,20,0,734,13,True,0,"Tahoma",8.25,,1)
+Gui.Form.txtItem.Parent("tab1",0)
+Gui.Form.txtItem.MaxLength(17)
+Gui.Form.txtItem.Event(GotFocus,txtItem_GotFocus)
+Gui.Form.lblTotInvoice.Create(Label,"Total To be Invoiced:",True,149,13,0,476,16,True,0,"Tahoma",8.25,,0,0)
+Gui.Form.lblTotInvoice.BorderStyle(0)
+Gui.Form.lblTotInvoice.Parent("tab1",0)
+Gui.Form.lblPercentSign.Create(Label,"%",True,11,13,0,297,16,True,0,"Tahoma",8.25,,0,0)
+Gui.Form.lblPercentSign.BorderStyle(0)
+Gui.Form.lblPercentSign.Parent("tab1",0)
+Gui.Form.lblPercentBill.Create(Label,"Percent To Bill:",True,71,13,0,189,16,True,0,"Tahoma",8.25,,0,0)
+Gui.Form.lblPercentBill.BorderStyle(0)
+Gui.Form.lblPercentBill.Parent("tab1",0)
+Gui.Form.lblItem.Create(Label,"Desc:",True,26,13,0,704,17,True,0,"Tahoma",8.25,,0,0)
+Gui.Form.lblItem.BorderStyle(0)
+Gui.Form.lblItem.Parent("tab1",0)
+Gui.Form.lblBillDate.Create(Label,"Billing Date:",True,56,13,0,10,16,True,0,"Tahoma",8.25,,0,0)
+Gui.Form.lblBillDate.BorderStyle(0)
+Gui.Form.lblBillDate.Parent("tab1",0)
+Gui.Form.dtpBillDate.Create(DatePicker)
+Gui.Form.dtpBillDate.Enabled(True)
+Gui.Form.dtpBillDate.Visible(True)
+Gui.Form.dtpBillDate.Zorder(0)
+Gui.Form.dtpBillDate.Size(100,20)
+Gui.Form.dtpBillDate.Position(69,13)
+Gui.Form.dtpBillDate.CheckBox(False)
+Gui.Form.dtpBillDate.FontName("Tahoma")
+Gui.Form.dtpBillDate.FontSize(8.25)
+Gui.Form.dtpBillDate.Parent("tab1",0)
+Gui.Form.cmdGenerate.Create(Button)
+Gui.Form.cmdGenerate.Enabled(True)
+Gui.Form.cmdGenerate.Visible(True)
+Gui.Form.cmdGenerate.Zorder(0)
+Gui.Form.cmdGenerate.Size(75,23)
+Gui.Form.cmdGenerate.Position(983,12)
+Gui.Form.cmdGenerate.Caption("Generate")
+Gui.Form.cmdGenerate.FontName("Tahoma")
+Gui.Form.cmdGenerate.FontSize(8.25)
+Gui.Form.cmdGenerate.Parent("tab1",0)
+Gui.Form.cmdGenerate.Event(Click,cmdGenerate_Click)
+Gui.Form.GsGridProg.Create(GsGridControl)
+Gui.Form.GsGridProg.Enabled(True)
+Gui.Form.GsGridProg.Visible(True)
+Gui.Form.GsGridProg.Zorder(0)
+Gui.Form.GsGridProg.Size(1095,510)
+Gui.Form.GsGridProg.Position(0,50)
+Gui.Form.GsGridProg.Dock(5)
+Gui.Form.GsGridProg.Parent("tab1",0)
+Gui.Form.GsGridProg.Anchor(15)
+Gui.Form.GsGridProg.Event(MouseCellExit,GsGridProg_MouseCellExit)
+Gui.Form.GsGridProgHist.Create(GsGridControl)
+Gui.Form.GsGridProgHist.Enabled(True)
+Gui.Form.GsGridProgHist.Visible(True)
+Gui.Form.GsGridProgHist.Zorder(0)
+Gui.Form.GsGridProgHist.Size(1095,560)
+Gui.Form.GsGridProgHist.Position(0,0)
+Gui.Form.GsGridProgHist.Parent("tab1",1)
+Gui.Form.GsGridProgHist.Dock(5)
+Gui.Form.GsGridProgHist.Anchor(15)
+Gui.Form.cmdOrder.Create(Button)
+Gui.Form.cmdOrder.Enabled(True)
+Gui.Form.cmdOrder.Visible(True)
+Gui.Form.cmdOrder.Zorder(0)
+Gui.Form.cmdOrder.Size(25,23)
+Gui.Form.cmdOrder.Position(181,14)
+Gui.Form.cmdOrder.Caption("")
+Gui.Form.cmdOrder.FontName("Tahoma")
+Gui.Form.cmdOrder.FontSize(8.25)
+Gui.Form.cmdOrder.SvgPicture("icon_browser_color")
+Gui.Form.cmdOrder.Event(Click,cmdOrder_Click)
+Gui.Form.chkHist.Create(CheckBox)
+Gui.Form.chkHist.Size(120,20)
+Gui.Form.chkHist.Position(210,15)
+Gui.Form.chkHist.Caption("Browse For History")
+Gui.Form.lblCust.Create(Label,"Customer:",True,50,13,0,22,44,True,0,"Tahoma",8.25,,0,0)
+Gui.Form.lblCust.BorderStyle(0)
+Gui.Form.txtCust.Create(TextBox,"",True,100,20,0,74,41,True,0,"Tahoma",8.25,,1)
+Gui.Form.txtCust.Locked(True)
+Gui.Form.txtCust.MaxLength(6)
+Gui.Form.txtCustName.Create(TextBox,"",True,247,20,0,74,67,True,0,"Tahoma",8.25,,1)
+Gui.Form.txtCustName.Locked(True)
+Gui.Form.txtCustName.MaxLength(30)
+Gui.Form.lblTExt.Create(Label,"Total Extension:",True,78,13,0,364,18,True,0,"Tahoma",8.25,,0,0)
+Gui.Form.lblTExt.BorderStyle(0)
+Gui.Form.txtTExt.Create(TextBox,"",True,100,20,0,447,15,True,0,"Tahoma",8.25,,1)
+Gui.Form.txtTExt.NumericOnly(1)
+Gui.Form.txtTExt.Locked(True)
+Gui.Form.lblCurrency.Create(Label,"Currency:",True,48,13,0,394,44,True,0,"Tahoma",8.25,,0,0)
+Gui.Form.lblCurrency.BorderStyle(0)
+Gui.Form.txtCurrency.Create(TextBox,"",True,41,20,0,447,41,True,0,"Tahoma",8.25,,1)
+Gui.Form.txtCurrency.MaxLength(3)
+Gui.Form.txtCurrency.Locked(True)
+Gui.Form.lblARAcct.Create(Label,"AR Account:",True,60,13,0,382,70,True,0,"Tahoma",8.25,,0,0)
+Gui.Form.lblARAcct.BorderStyle(0)
+Gui.Form.txtARAcct.Create(TextBox,"",True,98,20,0,448,67,True,0,"Tahoma",8.25,,1)
+Gui.Form.txtARAcct.MaxLength(15)
+Gui.Form.cmdARAcct.Create(Button)
+Gui.Form.cmdARAcct.Enabled(True)
+Gui.Form.cmdARAcct.Visible(True)
+Gui.Form.cmdARAcct.Zorder(0)
+Gui.Form.cmdARAcct.Size(25,23)
+Gui.Form.cmdARAcct.Position(554,66)
+Gui.Form.cmdARAcct.Caption("")
+Gui.Form.cmdARAcct.FontName("Tahoma")
+Gui.Form.cmdARAcct.FontSize(8.25)
+Gui.Form.cmdARAcct.SvgPicture("icon_browser_color")
+Gui.Form.cmdARAcct.Event(Click,cmdARAcct_Click)
+Gui.Form.cmdPrintWS.Create(Button)
+Gui.Form.cmdPrintWS.Enabled(True)
+Gui.Form.cmdPrintWS.Visible(True)
+Gui.Form.cmdPrintWS.Zorder(0)
+Gui.Form.cmdPrintWS.Size(115,23)
+Gui.Form.cmdPrintWS.Position(979,16)
+Gui.Form.cmdPrintWS.Caption("Print Worksheet")
+Gui.Form.cmdPrintWS.FontName("Tahoma")
+Gui.Form.cmdPrintWS.FontSize(8.25)
+Gui.Form.cmdPrintWS.Event(Click,cmdPrintWS_Click)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+V.Global.bSqlOpen.Declare(Boolean,False)
+V.Global.sOrder.Declare(String,"")
+V.Global.bHist.Declare(Boolean,False)
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String,"")
+V.Local.sOrder.Declare(String,"")
+
+Function.Intrinsic.UI.UsePixels ' Allows you to use Pixels instead of Twips throughout
+
+Gui.Form.txtItem.MaxLength(30)
+
+F.Intrinsic.Control.IF(V.Caller.Hook,=,11930)
+	Gui.Form.cmdOrder.Visible(False)
+	Gui.Form.TxtOrder.Locked(True)
+	F.Intrinsic.String.LPad(V.Passed.000003,"0",7,V.Local.sOrder)
+	Gui.Form.TxtOrder.Text(V.Local.sOrder)
+	F.Intrinsic.Control.IF(V.Passed.000003.Trim,=,"")
+		F.Intrinsic.UI.Msgbox("Select a Sales Order","Attention")
+		F.Intrinsic.Control.End
+	F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.CallSub(txtOrder_LostFocus)
+F.Intrinsic.Control.Else
+	Gui.Form.cmdOrder.Visible(True)
+	Gui.Form.TxtOrder.Locked(False)
+	F.Intrinsic.Control.CallSub(Get_Data)
+F.Intrinsic.Control.EndIf
+
+Gui.Form.cmdPrintWS.Visible(False)
+
+F.Intrinsic.Control.CallSub(Set_Properties)
+
+Gui.Form.tab1.SetTab(0)
+
+Gui.Form..Show
+
+Gui.Form..AlwaysOnTop(True)
+Gui.Form..AlwaysOnTop(False)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	F.Intrinsic.String.Build("Project: GCG_6478_Progress_Billing.g2u {0}{0}Subroutine: {1}{0}Error Occurred {2} with description {3}",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+Program.Sub.Main.End
+
+Program.Sub.Form_UnLoad.Start
+F.Intrinsic.Control.SetErrorHandler("Form_UnLoad_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String,"")
+
+F.Intrinsic.Control.If(V.Global.bSqlOpen)
+	F.ODBC.Connection!Con.Close
+	V.Global.bSqlOpen.Set(False)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.End
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Form_UnLoad_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	F.Intrinsic.Control.End
+Function.Intrinsic.Control.EndIf
+Program.Sub.Form_UnLoad.End
+
+Program.Sub.Get_Data.Start
+F.Intrinsic.Control.SetErrorHandler("Get_Data_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String,"")
+V.Local.sSql.Declare(String,"")
+V.Local.sFilter.Declare(String,"")
+V.Local.sRet.Declare(String,"")
+
+F.Intrinsic.Control.If(V.Screen.Form!chkHist.Value,=,1)
+	V.Global.bHist.Set(True)
+	F.Intrinsic.Control.If(V.DataTable.dtPB.Exists)
+		Gui.Form.GsGridProg.SetColumnProperty("gvPB","Current_PB_Pct","ReadOnly",True)
+		Gui.Form.GsGridProg.SetColumnProperty("gvPB","Current_PB_Pct","AllowEdit",False)
+		Gui.Form.cmdGenerate.Enabled(False)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Else
+	V.Global.bHist.Set(Flase)
+	F.Intrinsic.Control.If(V.DataTable.dtPB.Exists)
+		Gui.Form.GsGridProg.SetColumnProperty("gvPB","Current_PB_Pct","ReadOnly",False)
+		Gui.Form.GsGridProg.SetColumnProperty("gvPB","Current_PB_Pct","AllowEdit",True)
+		Gui.Form.cmdGenerate.Enabled(True)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.If(V.Global.bHist)
+	F.Intrinsic.String.Build("Select Order_Line as Record_No, rtrim(Part) as Part, rtrim(Description) as Description, Qty_Ordered, Price, Extension, Case When Flag_Tax_Status = 'T' Then 'Y' Else 'N' End as Tax From V_Order_Hist_Line Where Order_NO = '{0}' and Line_Type = 'S' and rtrim(ucase(Description)) <> 'PROGRESS BILLING'",V.Screen.Form!txtOrder.Text,V.Local.sSql)
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Build("Select Record_No, rtrim(Part) as Part, rtrim(Description) as Description, Qty_Ordered, Price, Extension, Case When Flag_Tax_Status = 'T' Then 'Y' Else 'N' End as Tax From V_Order_Lines Where Order_NO = '{0}' and Line_Type = 'S' and rtrim(ucase(Description)) <> 'PROGRESS BILLING'",V.Screen.Form!txtOrder.Text,V.Local.sSql)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.If(V.Global.bSqlOpen,=,False)
+	F.ODBC.Connection!con.OpenCompanyConnection
+	V.Global.bSqlOpen.Set(True)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.If(V.DataTable.dtPB.Exists,=,False)
+	F.Data.DataTable.CreateFromSQL("dtPB","con",V.Local.sSql,True)
+'	F.Data.DataTable.AddColumn("dtPB","Tax",Float)
+	F.Data.DataTable.AddColumn("dtPB","Current_PB_Pct",Float)
+	F.Data.DataTable.AddExpressionColumn("dtPB","Current_PB_Amt",Float,"Extension*(Current_PB_Pct *.01)")
+'	F.Data.DataTable.AddColumn("dtPB","Total_PB_Amt",Float)
+	F.Data.DataTable.AddColumn("dtPB","Prior_PB_Amt",Float)
+	F.Data.DataTable.AddExpressionColumn("dtPB","Total_PB_Amt",Float,"Current_PB_Amt+Prior_PB_Amt")
+'	F.Data.DataTable.AddColumn("dtPB","Current_PB_Amt",Float)
+	F.Data.DataTable.AddExpressionColumn("dtPB","Balance_To_Bill",Float,"Extension-Total_PB_Amt")
+'	F.Data.DataTable.AddColumn("dtPB","Balance_To_Bill",Float)
+	F.Data.DataTable.AddExpressionColumn("dtPB","Sum_Extension",Float,"Sum(Extension)")
+	F.Data.DataTable.AddExpressionColumn("dtPB","Sum_Current_PB_Amt",Float,"Sum(Current_PB_Amt)")
+	F.Data.DataTable.AddExpressionColumn("dtPB","Sum_Total_PB_Amt",Float,"Sum(Total_PB_Amt)")
+	F.Data.DataTable.AddExpressionColumn("dtPB","Sum_Prior_PB_Amt",Float,"Sum(Prior_PB_Amt)")
+	F.Data.DataTable.AddExpressionColumn("dtPB","Sum_Balance_To_Bill",Float,"Sum(Balance_To_Bill)")
+	
+	F.Intrinsic.String.Build("Select Order_NO, Record_No, Prog_Line, Part, Percentage, Bill_Amt, AR_Account From GCG_6478_Prior_Prog Where Order_NO = '{0}' Order by Prog_Line",V.Screen.Form!txtOrder.Text,V.Local.sSql)
+	
+	F.Intrinsic.Control.If(V.DataTable.Prog.Exists)
+		F.Data.DataView.Close("Prog","LastProg")
+		F.Data.DataTable.Close("Prog")
+	F.Intrinsic.Control.EndIf
+
+	F.Data.DataTable.CreateFromSQL("Prog","con",V.Local.sSql,True)
+	
+	F.Intrinsic.Control.If(V.DataTable.Prog.RowCount--,<>,-1)
+		F.Intrinsic.String.Build("Prog_Line = '{0}'",V.DataTable.Prog(V.DataTable.Prog.RowCount--).Prog_Line!FieldVal,V.Local.sFilter)
+	F.Intrinsic.Control.EndIf
+	
+	F.Data.DataView.Create("Prog","LastProg",22,V.Local.sFilter,"Record_NO")
+	
+	F.Intrinsic.String.Build("Select Record_No, sum(Bill_Amt) as Bill_Amt From GCG_6478_Prior_Prog Where Order_NO = '{0}' Group by Record_No",V.Screen.Form!txtOrder.Text,V.Local.sSql)
+	
+	F.Intrinsic.Control.If(V.DataTable.Prior.Exists)
+		F.Data.DataView.Close("Prior","VPrior")
+		F.Data.DataTable.Close("Prior")
+	F.Intrinsic.Control.EndIf
+	
+	F.Data.DataTable.CreateFromSQL("Prior","con",V.Local.sSql,True)
+	
+	F.Data.DataView.Create("Prior","VPrior",22,"","")
+	
+	F.Data.Dictionary.CreateFromDataView("BillAmt","Prior","VPrior","Record_No","Bill_Amt")
+	F.Data.Dictionary.SetDefaultReturn("BillAmt","0.00")
+	F.Data.DataTable.FillFromDictionary("dtPB","BillAmt","Record_No","Prior_PB_Amt")
+	F.Data.Dictionary.Close("BillAmt")
+	
+	F.Data.DataTable.SetValue("dtPB",-1,"Current_PB_Pct","0")
+	
+	F.Intrinsic.Control.If(V.DataView.Prog!LastProg.RowCount--,<>,-1)
+		Gui.Form.txtARAcct.Text(V.DataView.Prog!LastProg(V.DataView.Prog!LastProg.RowCount--).AR_Account!FieldValTrim)
+		Gui.Form.txtPrecentBill.Text("0")
+		Gui.Form.txtTotInvoice.Text("0")
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.Build("Select Top 1 Acct_Num From AR_ACCTS_RCV Where is_Default = 1",V.Screen.Form!txtOrder.Text,V.Local.sSql)
+		F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSql,V.Local.sRet)
+		F.Intrinsic.Control.If(V.Local.sRet.Trim,=,"")
+			F.Intrinsic.String.Build("Select Top 1 Acct_Num From AR_ACCTS_RCV Where is_Default = 0 Order by Acct_Num",V.Screen.Form!txtOrder.Text,V.Local.sSql)
+			F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSql,V.Local.sRet)
+		F.Intrinsic.Control.EndIf
+		Gui.Form.txtPrecentBill.Text("0")
+		Gui.Form.txtTotInvoice.Text("0")
+		Gui.Form.txtARAcct.Text(V.Local.sRet.Trim)
+	F.Intrinsic.Control.EndIf
+	
+F.Intrinsic.Control.Else
+	Gui.Form.GsGridProg.SuspendLayout
+	Gui.Form..Enabled(False)
+	F.Data.DataTable.CreateFromSQL("dtPBTemp","con",V.Local.sSql,True)
+	F.Data.DataTable.DeleteRow("dtPB")
+	F.Data.DataTable.AcceptChanges("dtPB")
+	F.Intrinsic.Control.If(V.DataTable.dtPBTemp.RowCount--,<>,-1)
+		F.Data.DataTable.Merge("dtPBTemp","dtPB",False,2)
+	F.Intrinsic.Control.EndIf
+	F.Data.DataTable.Close("dtPBTemp")
+	
+	F.Intrinsic.String.Build("Select Order_NO, Record_No, Prog_Line, Part, Percentage, Bill_Amt, AR_Account From GCG_6478_Prior_Prog Where Order_NO = '{0}' Order by Prog_Line",V.Global.sOrder,V.Local.sSql)
+	
+	F.Intrinsic.Control.If(V.DataTable.Prog.Exists)
+		F.Data.DataView.Close("Prog","LastProg")
+		F.Data.DataTable.Close("Prog")
+	F.Intrinsic.Control.EndIf
+
+	F.Data.DataTable.CreateFromSQL("Prog","con",V.Local.sSql,True)
+	
+	F.Intrinsic.Control.If(V.DataTable.Prog.RowCount--,<>,-1)
+		F.Intrinsic.String.Build("Prog_Line = '{0}'",V.DataTable.Prog(V.DataTable.Prog.RowCount--).Prog_Line!FieldVal,V.Local.sFilter)
+	F.Intrinsic.Control.EndIf
+	
+	F.Data.DataView.Create("Prog","LastProg",22,V.Local.sFilter,"Record_NO")
+	
+	F.Intrinsic.String.Build("Select Record_No, sum(Bill_Amt) as Bill_Amt From GCG_6478_Prior_Prog Where Order_NO = '{0}' Group by Record_No",V.Global.sOrder,V.Local.sSql)
+	
+	F.Intrinsic.Control.If(V.DataTable.Prior.Exists)
+		F.Data.DataView.Close("Prior","VPrior")
+		F.Data.DataTable.Close("Prior")
+	F.Intrinsic.Control.EndIf
+	
+	F.Data.DataTable.CreateFromSQL("Prior","con",V.Local.sSql,True)
+	
+	F.Data.DataView.Create("Prior","VPrior",22,"","")
+	
+	F.Data.Dictionary.CreateFromDataView("BillAmt","Prior","VPrior","Record_No","Bill_Amt")
+	F.Data.Dictionary.SetDefaultReturn("BillAmt","0.00")
+	F.Data.DataTable.FillFromDictionary("dtPB","BillAmt","Record_No","Prior_PB_Amt")
+	F.Data.Dictionary.Close("BillAmt")
+	
+	F.Data.DataTable.SetValue("dtPB",-1,"Current_PB_Pct","0")
+	
+	F.Intrinsic.Control.If(V.DataView.Prog!LastProg.RowCount--,<>,-1)
+		Gui.Form.txtARAcct.Text(V.DataView.Prog!LastProg(V.DataView.Prog!LastProg.RowCount--).AR_Account!FieldValTrim)
+		Gui.Form.txtPrecentBill.Text("0")
+		Gui.Form.txtTotInvoice.Text("0")
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.Build("Select Top 1 GL_Account From V_Order_Lines Where Order_NO = '{0}' Order By Record_No",V.Global.sOrder,V.Local.sSql)
+		F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSql,V.Local.sRet)
+'		Gui.Form.txtRetPercent.Text("0")
+		Gui.Form.txtPrecentBill.Text("0")
+		Gui.Form.txtTotInvoice.Text("0")
+		Gui.Form.txtARAcct.Text(V.Local.sRet.Trim)
+	F.Intrinsic.Control.EndIf
+	
+	Gui.Form..Enabled(True)
+	Gui.Form.GsGridProg.ResumeLayout
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.If(V.Global.bHist)
+	F.Intrinsic.String.Build("Select C.Invoice, A.Order_NO, A.Record_No, Prog_Line, rtrim(A.Part) as Part, rtrim(B.Description) as Description, B.Qty_Ordered, B.Price, B.Extension, Percentage, Bill_Amt, AR_Account From GCG_6478_Prior_Prog A Left Join V_Order_Hist_Line B on A.Order_NO = B.Order_NO and A.Record_No = B.Order_Line Left Join V_Order_Hist_Line C on A.Order_NO = C.Order_No and A.Prog_Line = C.Order_Line Where A.Order_No = '{0}' Order by Prog_Line,A.Record_No",V.Global.sOrder,V.Local.sSql)
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Build("Select C.Invoice, A.Order_NO, A.Record_No, Prog_Line, rtrim(A.Part) as Part, rtrim(B.Description) as Description, B.Qty_Ordered, B.Price, B.Extension, Percentage, Bill_Amt, AR_Account From GCG_6478_Prior_Prog A Left Join V_Order_Lines B on A.Order_NO = B.Order_No and A.Record_No = B.Record_No Left Join V_Order_Hist_Line C on A.Order_NO = C.Order_No and A.Prog_Line = C.Order_Line Where A.Order_No = '{0}' Order by Prog_Line,A.Record_No",V.Global.sOrder,V.Local.sSql)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.If(V.DataTable.Detail.Exists)
+	F.Data.DataTable.CreateFromSQL("DetailTemp","con",V.Local.sSql,True)
+	F.Data.DataTable.DeleteRow("Detail")
+	F.Data.DataTable.AcceptChanges("Detail")
+	F.Data.DataTable.Merge("DetailTemp","Detail",False,2)
+	F.Data.DataTable.Close("DetailTemp")
+F.Intrinsic.Control.Else
+	F.Data.DataTable.CreateFromSQL("Detail","con",V.Local.sSql,True)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.If(V.Global.bSqlOpen)
+	F.ODBC.Connection!con.Close
+	V.Global.bSqlOpen.Set(False)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Get_Data_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	F.Intrinsic.String.Build("Project: GCG_6478_Progress_Billing.g2u {0}{0}Subroutine: {1}{0}Error Occurred {2} with description {3}",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form_Unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.Get_Data.End
+
+Program.Sub.Set_Properties.Start
+F.Intrinsic.Control.SetErrorHandler("Set_Properties_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String,"")
+
+Gui.Form.GsGridProg.AddGridviewFromDatatable("gvPB","dtPB")
+Gui.Form.GsGridProg.SetGridviewProperty("gvPB", "OptionsViewColumnAutoWidth", True)
+
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Record_No","ReadOnly",True)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Record_No","AllowEdit",False)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Record_No","Caption","Line")
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Record_No","HeaderForeColor",V.Color.PRI-GSS-00)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Record_No","HeaderFontBold", true)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Record_No","Width", "50")
+
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Part","ReadOnly",True)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Part","AllowEdit",False)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Part","Caption","Part")
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Part","HeaderForeColor",V.Color.PRI-GSS-00)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Part","HeaderFontBold", true)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Part","Width", "100")
+
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Description","ReadOnly",True)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Description","AllowEdit",False)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Description","Caption","Description")
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Description","HeaderForeColor",V.Color.PRI-GSS-00)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Description","HeaderFontBold", true)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Description","Width", "200")
+
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Qty_Ordered","ReadOnly",True)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Qty_Ordered","AllowEdit",False)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Qty_Ordered","Caption","Qty")
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Qty_Ordered","HeaderForeColor",V.Color.PRI-GSS-00)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Qty_Ordered","HeaderFontBold", true)
+
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Price","ReadOnly",True)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Price","AllowEdit",False)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Price","Caption","Price")
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Price","HeaderForeColor",V.Color.PRI-GSS-00)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Price","HeaderFontBold", true)
+
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Extension","ReadOnly",True)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Extension","AllowEdit",False)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Extension","Caption","Extension")
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Extension","HeaderForeColor",V.Color.PRI-GSS-00)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Extension","HeaderFontBold", true)
+Gui.Form.GsGridProg.AddSummaryItem("gvPB","Extension","Extension","Sum","","")
+
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Tax","ReadOnly",True)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Tax","AllowEdit",False)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Tax","Caption","Tax")
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Tax","HeaderForeColor",V.Color.PRI-GSS-00)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Tax","HeaderFontBold", true)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Tax","HeaderHAlignment", "Center")
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Tax","Width", "40")
+
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Current_PB_Pct","ReadOnly",False)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Current_PB_Pct","AllowEdit",True)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Current_PB_Pct","Caption","Current PB Pct")
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Current_PB_Pct","HeaderForeColor",V.Color.PRI-GSS-00)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Current_PB_Pct","HeaderFontBold", true)
+
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Current_PB_Amt","ReadOnly",True)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Current_PB_Amt","AllowEdit",False)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Current_PB_Amt","Caption","Current PB Amt")
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Current_PB_Amt","HeaderForeColor",V.Color.PRI-GSS-00)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Current_PB_Amt","HeaderFontBold", true)
+Gui.Form.GsGridProg.AddSummaryItem("gvPB","Current_PB_Amt","Current_PB_Amt","Sum","","")
+
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Prior_PB_Amt","ReadOnly",True)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Prior_PB_Amt","AllowEdit",False)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Prior_PB_Amt","Caption","Prior PB Amt")
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Prior_PB_Amt","HeaderForeColor",V.Color.PRI-GSS-00)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Prior_PB_Amt","HeaderFontBold", true)
+Gui.Form.GsGridProg.AddSummaryItem("gvPB","Prior_PB_Amt","Prior_PB_Amt","Sum","","")
+
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Total_PB_Amt","ReadOnly",True)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Total_PB_Amt","AllowEdit",False)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Total_PB_Amt","Caption","Total PB Amt")
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Total_PB_Amt","HeaderForeColor",V.Color.PRI-GSS-00)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Total_PB_Amt","HeaderFontBold", true)
+Gui.Form.GsGridProg.AddSummaryItem("gvPB","Total_PB_Amt","Total_PB_Amt","Sum","","")
+
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Balance_To_Bill","ReadOnly",True)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Balance_To_Bill","AllowEdit",False)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Balance_To_Bill","Caption","Balance To Bill")
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Balance_To_Bill","HeaderForeColor",V.Color.PRI-GSS-00)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Balance_To_Bill","HeaderFontBold", true)
+Gui.Form.GsGridProg.AddSummaryItem("gvPB","Balance_To_Bill","Balance_To_Bill","Sum","","")
+
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Sum_Extension","Visible",False)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Sum_Current_PB_Amt","Visible",False)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Sum_Total_PB_Amt","Visible",False)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Sum_Prior_PB_Amt","Visible",False)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Sum_Balance_To_Bill","Visible",False)
+
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Sum_Extension","AllowShowHide",False)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Sum_Current_PB_Amt","AllowShowHide",False)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Sum_Total_PB_Amt","AllowShowHide",False)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Sum_Prior_PB_Amt","AllowShowHide",False)
+Gui.Form.GsGridProg.SetColumnProperty("gvPB","Sum_Balance_To_Bill","AllowShowHide",False)
+
+Gui.Form.GsGridProg.MainView("gvPB")
+
+Gui.Form.GsGridProgHist.AddGridviewFromDatatable("gvDetail","Detail")
+Gui.Form.GsGridProgHist.SetGridviewProperty("gvDetail", "OptionsViewColumnAutoWidth", True)
+
+Gui.Form.GsGridProgHist.MainView("gvDetail")
+
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Invoice","ReadOnly",True)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Invoice","AllowEdit",False)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Invoice","Caption","Invoice")
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Invoice","HeaderForeColor",V.Color.PRI-GSS-00)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Invoice","HeaderFontBold", true)
+
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Order_No","ReadOnly",True)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Order_No","AllowEdit",False)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Order_No","Caption","Order #")
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Order_No","HeaderForeColor",V.Color.PRI-GSS-00)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Order_No","HeaderFontBold", true)
+
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Record_No","ReadOnly",True)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Record_No","AllowEdit",False)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Record_No","Caption","Line")
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Record_No","HeaderForeColor",V.Color.PRI-GSS-00)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Record_No","HeaderFontBold", true)
+
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Prog_Line","ReadOnly",True)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Prog_Line","AllowEdit",False)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Prog_Line","Caption","Progress Line")
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Prog_Line","HeaderForeColor",V.Color.PRI-GSS-00)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Prog_Line","HeaderFontBold", true)
+
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Part","ReadOnly",True)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Part","AllowEdit",False)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Part","Caption","Part")
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Part","HeaderForeColor",V.Color.PRI-GSS-00)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Part","HeaderFontBold", true)
+
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Description","ReadOnly",True)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Description","AllowEdit",False)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Description","Caption","Description")
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Description","HeaderForeColor",V.Color.PRI-GSS-00)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Description","HeaderFontBold", true)
+
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Qty_Ordered","ReadOnly",True)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Qty_Ordered","AllowEdit",False)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Qty_Ordered","Caption","Qty")
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Qty_Ordered","HeaderForeColor",V.Color.PRI-GSS-00)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Qty_Ordered","HeaderFontBold", true)
+
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Price","ReadOnly",True)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Price","AllowEdit",False)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Price","Caption","Price")
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Price","HeaderForeColor",V.Color.PRI-GSS-00)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Price","HeaderFontBold", true)
+
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Extension","ReadOnly",True)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Extension","AllowEdit",False)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Extension","Caption","Extension")
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Extension","HeaderForeColor",V.Color.PRI-GSS-00)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Extension","HeaderFontBold", true)
+
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Percentage","ReadOnly",True)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Percentage","AllowEdit",False)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Percentage","Caption","Percentage")
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Percentage","HeaderForeColor",V.Color.PRI-GSS-00)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Percentage","HeaderFontBold", true)
+
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Bill_Amt","ReadOnly",True)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Bill_Amt","AllowEdit",False)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Bill_Amt","Caption","Pre-Tax Bill Amt")
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Bill_Amt","HeaderForeColor",V.Color.PRI-GSS-00)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","Bill_Amt","HeaderFontBold", true)
+
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","AR_Account","ReadOnly",True)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","AR_Account","AllowEdit",False)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","AR_Account","Caption","AR Account")
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","AR_Account","HeaderForeColor",V.Color.PRI-GSS-00)
+Gui.Form.GsGridProgHist.SetColumnProperty("gvDetail","AR_Account","HeaderFontBold", true)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Set_Properties_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	F.Intrinsic.String.Build("Project: GCG_6478_Progress_Billing.g2u {0}{0}Subroutine: {1}{0}Error Occurred {2} with description {3}",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form_Unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.Set_Properties.End
+
+Program.Sub.cmdOrder_Click.Start
+F.Intrinsic.Control.SetErrorHandler("cmdOrder_Click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String,"")
+V.Local.sSql.Declare(String,"")
+V.Local.sTitles.Declare(String,"")
+V.Local.sWidths.Declare(String,"")
+V.Local.sRet.Declare(String,"")
+
+F.Intrinsic.UI.SetBrowserHotTypeAhead(True)
+
+F.Intrinsic.Control.If(V.Screen.Form!chkHist.Value,=,0)
+	V.Local.sSql.Set("Select A.Order_No, A.Customer, B.Name_Customer, (Select Sum(Extension) From V_Order_Lines D Where A.Order_No = D.Order_No and (Line_Type <> 'P' OR rtrim(ucase(Description)) <> 'PROGRESS BILLING')), Order_Currency, A.Project, Descr From V_Order_Header A Left Join V_Customer_Master B on A.Customer = B.Customer Left Join V_Project_Master C on A.Project = C.Project Order by A.Order_No") 
+F.Intrinsic.Control.Else
+	V.Local.sSql.Set("Select A.Order_No, A.Customer, B.Name_Customer, (Select Sum(Extension) From V_Order_Hist_Line D Where A.Order_No = D.Order_No and (Line_Type <> 'P' OR rtrim(ucase(Description)) <> 'PROGRESS BILLING')), Order_Currency, A.Project, Descr From V_Order_Hist_Head A Left Join V_Customer_Master B on A.Customer = B.Customer Left Join V_PROJECT_HISTORY C on A.Project = C.Project Order by A.Order_No")
+F.Intrinsic.Control.EndIf
+
+V.Local.sTitles.Set("Order*!*Customer*!*Customer Name*!*Total Extension*!*Currency*!*Project*!*Project Name")
+V.Local.sWidths.Set("1500*!*1500*!*3500*!*1500*!*1500*!*1500*!*3500")
+
+F.Intrinsic.String.Split(V.Local.sTitles,"*!*",V.Local.sTitles)
+F.Intrinsic.String.Split(V.Local.sWidths,"*!*",V.Local.sWidths)
+
+F.Intrinsic.Control.If(V.Global.bSqlOpen,=,False)
+	F.ODBC.Connection!con.OpenCompanyConnection
+	V.Global.bSqlOpen.Set(True)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.UI.Browser("Select Sales Order","con",V.Local.sSql,V.Local.sTitles,V.Local.sWidths,13200,9000,V.Local.sRet)
+
+F.Intrinsic.Control.If(V.Global.bSqlOpen)
+	F.ODBC.Connection!Con.Close
+	V.Global.bSqlOpen.Set(False)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.If(V.Local.sRet,<>,V.Ambient.Cancel)
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	Gui.Form.txtOrder.Text(V.Local.sRet)
+	F.Intrinsic.Control.If(V.Global.sOrder,<>,V.Local.sRet(0))
+		Gui.Form.txtOrder.Text(V.Local.sRet(0))
+		Gui.Form.txtCust.Text(V.Local.sRet(1))
+		Gui.Form.txtCustName.Text(V.Local.sRet(2))
+		F.Intrinsic.String.Format(V.Local.sRet(3).Float,"########0.00",V.Local.sRet(3))
+		Gui.Form.txtTExt.Text(V.Local.sRet(3))
+		Gui.Form.txtCurrency.Text(V.Local.sRet(4))
+		Gui.Form.txtProject.Text(V.Local.sRet(5))
+		Gui.Form.txtProjectName.Text(V.Local.sRet(6))
+		V.Global.sOrder.Set(V.Local.sRet(0))
+		F.Intrinsic.Control.CallSub(Get_Data)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+	
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdOrder_Click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	F.Intrinsic.String.Build("Project: GCG_6478_Progress_Billing.g2u {0}{0}Subroutine: {1}{0}Error Occurred {2} with description {3}",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form_Unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.cmdOrder_Click.End
+
+Program.Sub.cmdARAcct_Click.Start
+F.Intrinsic.Control.SetErrorHandler("cmdARAcct_Click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String,"")
+V.Local.sRet.Declare(String,"")
+
+F.Intrinsic.UI.SetBrowserHotTypeAhead(True)
+
+F.Intrinsic.UI.Browser(6000,"",V.Local.sRet)
+
+F.Intrinsic.Control.If(V.Local.sRet,<>,V.Ambient.Cancel)
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	Gui.Form.txtARAcct.Text(V.Local.sRet.Trim)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdARAcct_Click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	F.Intrinsic.String.Build("Project: GCG_6478_Progress_Billing.g2u {0}{0}Subroutine: {1}{0}Error Occurred {2} with description {3}",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form_Unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.cmdARAcct_Click.End
+
+Program.Sub.txtOrder_LostFocus.Start
+F.Intrinsic.Control.SetErrorHandler("txtOrder_LostFocus_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String,"")
+V.Local.sSql.Declare(String,"")
+V.Local.sOrder.Declare(String,"")
+V.Local.sRet.Declare(String,"")
+
+F.Intrinsic.String.LPad(V.Screen.Form!txtOrder.Text,"0",7,V.Local.sOrder)
+
+F.Intrinsic.Control.BlockEvents
+
+F.Intrinsic.Control.If(V.Global.sOrder,<>,V.Local.sOrder)
+	F.Intrinsic.String.Build("Select A.Order_No, A.Customer, B.Name_Customer, (Select Sum(Extension) From V_Order_Lines D Where A.Order_No = D.Order_No and (Line_Type <> 'P' OR rtrim(ucase(Description)) <> 'PROGRESS BILLING')) as TExt, Order_Currency, A.Project, Descr From V_Order_Header A Left Join V_Customer_Master B on A.Customer = B.Customer Left Join V_Project_Master C on A.Project = C.Project Where A.Order_No = '{0}'",V.Local.sOrder,V.Local.sSql)
+	
+	F.Intrinsic.Control.If(V.Global.bSqlOpen,=,False)
+		F.ODBC.Connection!con.OpenCompanyConnection
+		V.Global.bSqlOpen.Set(True)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSql,V.Local.sRet)
+	F.Intrinsic.Control.If(V.Global.bSqlOpen)
+		F.ODBC.Connection!Con.Close
+		V.Global.bSqlOpen.Set(False)
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.If(V.Local.sRet.Trim,<>,"")
+		F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+		Gui.Form.txtOrder.Text(V.Local.sRet(0))
+		Gui.Form.txtCust.Text(V.Local.sRet(1))
+		Gui.Form.txtCustName.Text(V.Local.sRet(2))
+		F.Intrinsic.String.Format(V.Local.sRet(3).Float,"########0.00",V.Local.sRet(3))
+		Gui.Form.txtTExt.Text(V.Local.sRet(3))
+		Gui.Form.txtCurrency.Text(V.Local.sRet(4))
+		Gui.Form.txtProject.Text(V.Local.sRet(5))
+		Gui.Form.txtProjectName.Text(V.Local.sRet(6))
+		V.Global.sOrder.Set(V.Local.sRet(0))
+		F.Intrinsic.Control.CallSub(Get_Data)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.Control.If(V.Local.sOrder,<>,"0000000")
+			F.Intrinsic.UI.Msgbox("Sales Order Not Found","Attention")
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.UnBlockEvents
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("txtOrder_LostFocus_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	F.Intrinsic.String.Build("Project: GCG_6478_Progress_Billing.g2u {0}{0}Subroutine: {1}{0}Error Occurred {2} with description {3}",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form_Unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.txtOrder_LostFocus.End
+
+Program.Sub.txtOrder_GotFocus.Start
+F.Intrinsic.Control.SetErrorHandler("txtOrder_GotFocus_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String,"")
+
+Gui.Form.txtOrder.SelectAll
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("txtOrder_GotFocus_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	F.Intrinsic.String.Build("Project: GCG_6478_Progress_Billing.g2u {0}{0}Subroutine: {1}{0}Error Occurred {2} with description {3}",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form_Unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.txtOrder_GotFocus.End
+
+Program.Sub.cmdPrintWS_Click.Start
+F.Intrinsic.Control.SetErrorHandler("cmdPrintWS_Click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String,"")
+V.Local.sTemplateFile.Declare(String,"")
+V.Local.sFile.Declare(String,"")
+V.Local.bRet.Declare(Boolean,False)
+V.Local.sColumns.Declare(String,"")
+V.Local.sDataStart.Declare(String,"")
+V.Local.sData.Declare(String,"")
+V.Local.sFileName.Declare(String,"")
+V.Local.sShipTo.Declare(String,"")
+V.Local.sCustAddy.Declare(String,"")
+V.Local.sSql.Declare(String,"")
+V.Local.sCallParams.Declare(String,"")
+V.Local.fTaxAmount.Declare(Float,0)
+V.Local.fTaxPercent.Declare(Float,0)
+V.Local.fTotal.Declare(Float,0)
+V.Local.fOvPercent.Declare(Float,0)
+V.Local.fCurPercent.Declare(Float,0)
+V.Local.fOvAmt.Declare(Float,0)
+V.Local.fCurAmt.Declare(Float,0)
+V.Local.fBillAmt.Declare(Float,0)
+V.Local.i.Declare(Long,0)
+V.Local.fPiorAmt.Declare(Float,0)
+V.Local.fTotAmt.Declare(Float,0)
+V.Local.fRetPercent.Declare(Float,0)
+V.Local.fRetBill.Declare(Float,0)
+
+F.Intrinsic.Control.If(V.Global.bSqlOpen,=,False)
+	F.ODBC.Connection!Con.OpenCompanyConnection
+	V.Global.bSqlOpen.Set(True)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.String.Build("select Address_1, Address_2, Address_3, rtrim(City)+', '+State+'  '+Zip_Code as CST from V_ORDER_BILL_TO Where Order_No = '{0}'",V.Global.sOrder,V.Local.sSql)
+F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSql,V.Local.sCustAddy)
+F.Intrinsic.String.Split(V.Local.sCustAddy,"*!*",V.Local.sCustAddy)
+
+F.Intrinsic.String.Build("select SHIP_ID, NAME_CUSTOMER_SHIP,ADDRESS_1_SHIP,ADDRESS_2_SHIP,ADDRESS_3_SHIP, rtrim(CITY_SHIP)+', '+STATE_SHIP+'  '+CODE_ZIP_SHIP as CST from V_ORDER_SHIP_TO Where Order_No = '{0}'",V.Global.sOrder,V.Local.sSql)
+F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSql,V.Local.sShipTo)
+F.Intrinsic.String.Split(V.Local.sShipTo,"*!*",V.Local.sShipTo)
+
+V.Local.sShipTo.RedimPreserve(0,6)
+V.Local.sCustAddy.RedimPreserve(0,4)
+
+F.Intrinsic.Control.If(V.Global.bSqlOpen)
+	F.ODBC.Connection!Con.Close
+	V.Global.bSqlOpen.Set(False)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.UI.InvokeWaitDialog("Exporting to Excel")
+Gui.Form..Enabled(False)
+F.Intrinsic.Control.If(V.Caller.GasDir.Right1,=,"\")
+	F.Intrinsic.String.Build("{0}GCG_6478_Template.xlsx",V.Caller.GasDir,V.Local.sTemplateFile)
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Build("{0}\GCG_6478_Template.xlsx",V.Caller.GasDir,V.Local.sTemplateFile)
+F.Intrinsic.Control.EndIf
+
+V.Local.sFileName.Set(V.Ambient.Now)
+F.Intrinsic.String.StripCharacters(v.Ambient.Now,V.Local.sFileName)
+
+F.Intrinsic.Control.If(V.Caller.LocalGssTempDir.Right1,=,"\")
+	F.Intrinsic.String.Build("{0}GCG_6478_SOWorkSheet{1}.xlsx",V.Caller.LocalGssTempDir,V.Local.sFileName,v.Local.sFile)
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Build("{0}\GCG_6478_SOWorkSheet{1}.xlsx",V.Caller.LocalGssTempDir,V.Local.sFileName,v.Local.sFile)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.File.Exists(V.Local.sTemplateFile,V.Local.bRet)
+	
+F.Intrinsic.Control.If(V.Local.bRet,=,False)
+	V.Local.sTemplateFile.Set("")
+F.Intrinsic.Control.EndIf
+
+V.Local.sColumns.Set("Record_No*!*Part*!*Description*!*Qty_Ordered*!*Price*!*Extension*!*Tax*!*Current_PB_Pct*!*Current_PB_Amt*!*Prior_PB_Amt*!*Total_PB_Amt*!*Balance_To_Bill")
+
+F.Data.DataView.Create("dtPB","VdtPB",22,"","")
+F.Data.DataView.ToDataTable("dtPB","VdtPB","Temp",True)
+F.Data.DataView.Create("Temp","VTemp",22,"","")
+F.Intrinsic.Control.For(V.Local.i,0,V.DataTable.Temp.RowCount--,1)
+	F.Intrinsic.Math.Mult(V.DataTable.Temp(V.Local.i).Current_PB_Pct!FieldValFloat,.01,V.Local.fCurPercent)
+	F.Data.DataTable.SetValue("Temp",V.Local.i,"Current_PB_Pct",V.Local.fCurPercent)
+F.Intrinsic.Control.Next(v.Local.i)
+
+F.Data.DataView.ToString("Temp","VTemp",V.Local.sColumns,"*!*","$!$",V.Local.sData)
+
+F.Data.DataView.Close("dtPB","VdtPB")
+F.Data.DataView.Close("Temp","VTemp")
+F.Data.DataTable.Close("Temp")
+
+F.Intrinsic.String.Build("Progress Billing Worksheet*!**!*Intiial PB/Deposit*!*Date Billed: {0}",V.Screen.Form!dtpBillDate.Value,V.Local.sDataStart)
+F.Intrinsic.String.Build("{0}$!$",V.Local.sDataStart,V.Local.sDataStart)
+F.Intrinsic.String.Build("{0}$!$Sales Order # {1}*!**!*Customer No. {2}*!*Ship To ID {3}",V.Local.sDataStart,V.Global.sOrder,V.Screen.Form!txtCust.Text,V.Local.sShipTo(0),V.Local.sDataStart)
+F.Intrinsic.String.Build("{0}$!$*!**!*{1}*!*{2}",V.Local.sDataStart,V.Screen.Form!txtCustName.Text,V.Local.sShipTo(1),V.Local.sDataStart)
+F.Intrinsic.String.Build("{0}$!$Project ID: {1}*!**!*{2}*!*{3}",V.Local.sDataStart,V.Screen.Form!txtProject.Text,V.Local.sCustAddy(0),V.Local.sShipTo(2),V.Local.sDataStart)
+F.Intrinsic.String.Build("{0}$!${1}*!**!*{2}*!*{3}",V.Local.sDataStart,V.Screen.Form!txtProjectName.Text,V.Local.sCustAddy(1),V.Local.sShipTo(3),V.Local.sDataStart)
+F.Intrinsic.String.Build("{0}$!$*!**!*{1}*!*{2}",V.Local.sDataStart,V.Local.sCustAddy(2),V.Local.sShipTo(4),V.Local.sDataStart)
+F.Intrinsic.String.Build("{0}$!$*!**!*{1}*!*{2}",V.Local.sDataStart,V.Local.sCustAddy(3),V.Local.sShipTo(5),V.Local.sDataStart)
+F.Intrinsic.String.Build("{0}$!$*!**!*{1}*!*{2}",V.Local.sDataStart,V.Local.sCustAddy(4),V.Local.sShipTo(6),V.Local.sDataStart)
+F.Intrinsic.String.Build("{0}$!$",V.Local.sDataStart,V.Local.sDataStart)
+F.Intrinsic.String.Build("{0}$!$",V.Local.sDataStart,V.Local.sDataStart)
+F.Intrinsic.String.Build("{0}$!$Line #*!*Part #*!*Description*!*Qty*!*Price*!*Extended*!*Tax*!*Current PB Pct.*!*Current PB Amount*!*Prior PB Amount*!*Total PB Amount*!*Balance to Bill",V.Local.sDataStart,V.Local.sDataStart)
+F.Intrinsic.String.Build("{0}$!${1}",V.Local.sDataStart,V.Local.sData,V.Local.sData)
+
+F.Intrinsic.String.Concat(V.Global.sOrder,"!*!P!*! !*!|~|CRYSTAL-OVERRIDE|~|",V.Local.sCallParams)
+F.Global.General.CallWrapperSync(910050,V.Local.sCallParams)
+
+F.Intrinsic.Control.If(V.Global.bSqlOpen,=,False)
+	F.ODBC.Connection!Con.OpenCompanyConnection
+	V.Global.bSqlOpen.Set(True)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.String.Build("Select Sum(Total_Tax) From V_BI_ACKNWLDGMNT Where Terminal = '{0}' and Record_Type = 'S'",V.Caller.Terminal,V.Local.sSql)
+F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSql,V.Local.fTaxAmount)
+
+F.Intrinsic.String.Build("Select Top 1 (TAX_RATE_1+TAX_RATE_2+TAX_RATE_3+TAX_RATE_4+TAX_RATE_5+TAX_RATE_6+TAX_RATE_7+TAX_RATE_8+TAX_RATE_9+TAX_RATE_10)*100 From V_BI_ACKNWLDGMNT Where Terminal = '{0}' and Record_Type = 'S' Order by Total_Tax Desc",V.Caller.Terminal,V.Local.sSql)
+F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSql,V.Local.fTaxPercent)
+
+F.Intrinsic.String.Build("Select distinct prog_line, percentage from GCG_6478_Prior_Prog Where Order_No = '{0}'",V.Global.sOrder,V.Local.sSql)
+F.Data.DataTable.CreateFromSQL("Pct","con",V.Local.sSql,True)
+F.Data.DataTable.AddExpressionColumn("Pct","SumPct",Float,"Sum(percentage)")
+
+F.Intrinsic.Control.If(V.DataTable.Pct.RowCount--,<>,-1)
+
+F.Intrinsic.Control.Else
+
+F.Intrinsic.Control.EndIf
+
+F.Data.DataTable.Close("Pct")
+
+F.Intrinsic.Control.If(V.Global.bSqlOpen)
+	F.ODBC.Connection!Con.Close
+	V.Global.bSqlOpen.Set(False)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.String.Build("{0}$!$*!**!*SubTotal*!**!**!*{1}*!**!**!*{2}*!*{3}*!*{4}*!*{5}",V.Local.sData,V.DataTable.dtPB(V.DataTable.dtPB.RowCount--).Sum_Extension!FieldValFloat,V.DataTable.dtPB(V.DataTable.dtPB.RowCount--).Sum_Current_PB_Amt!FieldValFloat,V.DataTable.dtPB(V.DataTable.dtPB.RowCount--).Sum_Prior_PB_Amt!FieldValFloat,V.DataTable.dtPB(V.DataTable.dtPB.RowCount--).Sum_Total_PB_Amt!FieldValFloat,V.DataTable.dtPB(V.DataTable.dtPB.RowCount--).Sum_Balance_To_Bill!FieldValFloat,V.Local.sData)
+F.Intrinsic.String.Build("{0}%",V.Local.fTaxPercent,V.Local.sDataStart)
+F.Intrinsic.Math.Mult(V.Local.fTaxPercent,.01,V.Local.fTaxPercent)
+F.Intrinsic.Math.Mult(V.Local.fTaxPercent,V.DataTable.dtPB(V.DataTable.dtPB.RowCount--).Sum_Current_PB_Amt!FieldValFloat,V.Local.fCurAmt)
+F.Intrinsic.Math.Mult(V.Local.fTaxPercent,V.DataTable.dtPB(V.DataTable.dtPB.RowCount--).Sum_Prior_PB_Amt!FieldValFloat,V.Local.fPiorAmt)
+F.Intrinsic.Math.Mult(V.Local.fTaxPercent,V.DataTable.dtPB(V.DataTable.dtPB.RowCount--).Sum_Total_PB_Amt!FieldValFloat,V.Local.fTotAmt)
+F.Intrinsic.Math.Sub(V.Local.fTaxAmount,V.Local.fTotAmt,V.Local.fBillAmt)
+F.Intrinsic.String.Build("{0}$!$*!**!*Sales Tax*!*{1}*!**!*{2}*!**!**!*{3}*!*{4}*!*{5}*!*{6}",V.Local.sData,V.Local.sDataStart,V.Local.fTaxAmount,V.Local.fCurAmt,V.Local.fPiorAmt,V.Local.fTotAmt,V.Local.fBillAmt,V.Local.sData)
+F.Intrinsic.Math.Add(V.Local.fTaxAmount,V.DataTable.dtPB(V.DataTable.dtPB.RowCount--).Sum_Extension!FieldValFloat,V.Local.fTotal)
+F.Intrinsic.Math.Add(V.Local.fCurAmt,V.DataTable.dtPB(V.DataTable.dtPB.RowCount--).Sum_Current_PB_Amt!FieldValFloat,V.Local.fCurAmt)
+F.Intrinsic.Math.Add(V.Local.fPiorAmt,V.DataTable.dtPB(V.DataTable.dtPB.RowCount--).Sum_Prior_PB_Amt!FieldValFloat,V.Local.fPiorAmt)
+F.Intrinsic.Math.Add(V.Local.fTotAmt,V.DataTable.dtPB(V.DataTable.dtPB.RowCount--).Sum_Total_PB_Amt!FieldValFloat,V.Local.fTotAmt)
+F.Intrinsic.Math.Add(V.Local.fBillAmt,V.DataTable.dtPB(V.DataTable.dtPB.RowCount--).Sum_Balance_To_Bill!FieldValFloat,V.Local.fBillAmt)
+F.Intrinsic.String.Build("{0}$!$*!**!*Order Total*!**!**!*{1}*!**!**!*{2}*!*{3}*!*{4}*!*{5}",V.Local.sData,V.Local.fTotal,V.Local.fCurAmt,V.Local.fPiorAmt,V.Local.fTotAmt,V.Local.fBillAmt,V.Local.sData)
+'F.Intrinsic.Math.Mult(V.Screen.Form!txtRetPercent.Text,-1,V.Local.fRetPercent)
+'F.Intrinsic.String.Build("{0}%",V.Local.fRetPercent,V.Local.sDataStart)
+'F.Intrinsic.Math.Mult(V.Local.fRetPercent,.01,V.Local.fRetPercent)
+F.Intrinsic.Math.Mult(V.Local.fRetPercent,V.DataTable.dtPB(V.DataTable.dtPB.RowCount--).Sum_Extension!FieldValFloat,V.Local.fOvAmt)
+
+F.Intrinsic.Control.If(V.Local.fCurAmt,<>,0)
+	F.Intrinsic.String.Build("{0}$!$*!**!*Less Retention*!**!**!**!**!*{1}*!*{2}",V.Local.sData,V.Local.sDataStart,V.Local.fOvAmt,V.Local.sData)
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Build("{0}$!$*!**!*Less Retention*!**!**!**!**!*{1}*!*0",V.Local.sData,V.Local.sDataStart,V.Local.sData)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.If(V.Local.fPiorAmt,<>,0)
+	F.Intrinsic.String.Build("{0}*!*{1}",V.Local.sData,V.Local.fOvAmt,V.Local.sData)
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Build("{0}*!*0",V.Local.sData,V.Local.sData)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Math.Mult(V.Local.fOvAmt,-1,V.Local.fRetBill)
+F.Intrinsic.Control.If(V.Local.fTotAmt,<>,0)
+	F.Intrinsic.String.Build("{0}*!*{1}*!*{2}",V.Local.sData,V.Local.fOvAmt,V.Local.fRetBill,V.Local.sData)
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Build("{0}*!*0*!*{1}",V.Local.sData,V.Local.fRetBill,V.Local.sData)
+F.Intrinsic.Control.EndIf
+
+'F.Intrinsic.String.Build("{0}$!$*!**!*Less Retention*!**!**!**!**!*{1}*!*{2}*!*{2}*!*{2}*!*{2}",V.Local.sData,V.Local.sDataStart,V.Local.fOvAmt,V.Local.sData)
+F.Intrinsic.Control.If(V.Local.fCurAmt,<>,0)
+	F.Intrinsic.Math.Add(V.Local.fCurAmt,V.Local.fOvAmt,V.Local.fCurAmt)
+F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.If(V.Local.fPiorAmt,<>,0)
+	F.Intrinsic.Math.Add(V.Local.fPiorAmt,V.Local.fOvAmt,V.Local.fPiorAmt)
+F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.If(V.Local.fTotAmt,<>,0)
+	F.Intrinsic.Math.Add(V.Local.fTotAmt,V.Local.fOvAmt,V.Local.fTotAmt)
+F.Intrinsic.Control.EndIf
+F.Intrinsic.Math.Add(V.Local.fBillAmt,V.Local.fRetBill,V.Local.fBillAmt)
+F.Intrinsic.String.Build("{0}$!$*!**!*Net Billing*!**!**!**!**!**!*{1}*!*{2}*!*{3}*!*{4}",V.Local.sData,V.Local.fCurAmt,V.Local.fPiorAmt,V.Local.fTotAmt,V.Local.fBillAmt,V.Local.sData)
+
+F.Automation.MSExcel.WriteSpreadsheet(V.Local.sFile,V.Local.sTemplateFile,V.Local.sData)
+
+Gui.Form..Enabled(True)
+
+F.Intrinsic.UI.CloseWaitDialog
+	
+F.Intrinsic.Task.ShellExec(0,"",V.Local.sFile,"","",1)
+	
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdPrintWS_Click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	F.Intrinsic.String.Build("Project: GCG_6478_Progress_Billing.g2u {0}{0}Subroutine: {1}{0}Error Occurred {2} with description {3}",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form_Unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.cmdPrintWS_Click.End
+
+Program.Sub.cmdGenerate_Click.Start
+F.Intrinsic.Control.SetErrorHandler("cmdGenerate_Click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String,"")
+v.Local.fPct.Declare(Float,0)
+v.Local.fTotalLines.Declare(Float,0)
+v.Local.fProgLine.Declare(Float,0)
+v.Local.sHold.Declare(String,"")
+v.Local.sFileName.Declare(String,"")
+v.Local.sPath.Declare(String,"")
+v.Local.sParam.Declare(String,"")
+v.Local.sTemp.Declare(String,"")
+v.Local.sSQL.Declare(String,"")
+v.Local.sRet.Declare(String,"")
+V.Local.fRetPct.Declare(Float,0)
+V.Local.bSave.Declare(Boolean,False)
+V.Local.sGL.Declare(String,"")
+V.Local.i.Declare(Long,0)
+V.Local.sPLGL.Declare(String,"")
+V.Local.fTaxPercent.Declare(Float,0)
+V.Local.fTaxAmt.Declare(Float,0)
+V.Local.bFirstProg.Declare(Boolean,False)
+V.Local.sCallParams.Declare(String,"")
+V.Local.fBeforeTax.Declare(Float,0)
+V.Local.sDesc.Declare(String,"")
+V.Local.sLine.Declare(String,"")
+
+F.Intrinsic.Control.CallSub(GsGridProg_MouseCellExit)
+
+V.Local.sDesc.Set(V.Screen.Form!txtItem.Text)
+F.Intrinsic.String.RPad(V.Local.sDesc," ",30,V.Local.sDesc)
+
+f.Intrinsic.String.Build("Select Max(Record_No) from V_ORDER_LINES where Order_No = '{0}'  and Line_Type = 'P'",V.Global.sOrder,V.Local.sSQL)
+
+F.Intrinsic.Control.If(V.Global.bSqlOpen,=,False)
+	F.ODBC.Connection!Con.OpenCompanyConnection
+	V.Global.bSqlOpen.Set(True)
+F.Intrinsic.Control.EndIf
+
+F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSql,V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet.Trim,=,"")
+	V.Local.bFirstProg.Set(True)
+	V.Local.sLine.Set("100")
+F.Intrinsic.Control.Else
+	V.Local.sLine.Set(V.Local.sRet.Left3)
+	F.Intrinsic.Math.Add(V.Local.sLine.Long,1,V.Local.sLine)
+	V.Local.sRet.Set("")
+F.Intrinsic.Control.EndIf
+
+V.Local.sRet.Set(V.Screen.Form!txtTotInvoice.Text)
+'F.Intrinsic.Math.Mult(V.Screen.Form!txtRetPercent.Text,.01,V.Local.fRetPct)
+F.Intrinsic.Control.If(V.Local.sRet.Long,>,0)
+	V.Local.fProgLine.Set(V.Local.sRet.Float)
+	V.Local.sRet.Set("")
+F.Intrinsic.Control.Else
+	F.Intrinsic.UI.Msgbox("Total To Be Invoiced is not Greater than 0","Attention")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+Gui.Form..Enabled(False)
+
+F.Intrinsic.Control.If(V.Global.bSqlOpen,=,False)
+	F.ODBC.Connection!Con.OpenCompanyConnection
+	V.Global.bSqlOpen.Set(True)
+F.Intrinsic.Control.EndIf
+
+'Upload Progress line	
+f.Intrinsic.UI.InvokeWaitDialog("Uploading Progressive Line")
+
+V.Local.sTemp.Set("")
+'Transaction 1+7+7 "O" for Order, then Customer, Order #
+f.Intrinsic.String.Build("O{0} {1}",V.Screen.Form!txtCust.Text,v.Global.sOrder,v.Local.sTemp)
+
+'Part
+f.Intrinsic.String.Build("{0}{1}",v.Local.sTemp,"PROGRESS",v.Local.sTemp)
+
+'Location and Product Line
+f.Intrinsic.String.RPad(v.Local.sTemp," ",53,v.Local.sTemp)
+F.Intrinsic.String.Build("{0}    ",v.Local.sTemp,V.Local.sTemp)
+	
+'Description
+f.Intrinsic.String.RPad(v.Local.sTemp," ",60,v.Local.sTemp)
+F.Intrinsic.String.Build("{0}{1}",V.Local.sTemp,V.Local.sDesc,V.Local.sTemp)
+
+'line number 700 and Type P
+f.Intrinsic.String.RPad(v.Local.sTemp," ",90,v.Local.sTemp)
+F.Intrinsic.String.Build("{0}{1}P",V.Local.sTemp,V.Local.sLine,V.Local.sTemp)
+
+'quantity 9.4 13
+f.Intrinsic.String.RPad(v.Local.sTemp," ",94,v.Local.sTemp)
+F.Intrinsic.String.Build("{0}0000000010000",V.Local.sTemp,V.Local.sTemp)
+
+'price
+f.Intrinsic.String.RPad(v.Local.sTemp," ",117,v.Local.sTemp)
+f.Intrinsic.String.Format(v.Local.fProgLine,"0.000000",v.Local.sHold)
+f.Intrinsic.String.Replace(v.Local.sHold,".","",v.Local.sHold)
+F.Intrinsic.String.LPad(V.Local.sHold,"0",16,V.Local.sHold)
+F.Intrinsic.String.Build("{0}{1}",V.Local.sTemp,V.Local.sHold,V.Local.sTemp)
+	
+'UM
+F.Intrinsic.String.RPad(V.Local.sTemp," ",283,V.Local.sTemp)
+F.Intrinsic.String.Build("{0}EA",V.Local.sTemp,V.Local.sTemp)
+
+F.Intrinsic.String.Build("SOLINESUPLOAD{0}{1}",V.Caller.Terminal,V.Caller.CompanyCode,V.Local.sFileName)
+F.Intrinsic.String.Concat(V.Caller.FilesDir,"\",V.Local.sFileName,V.Local.sPath)
+F.Intrinsic.File.String2File(V.Local.sPath,V.Local.sTemp)
+
+'Upload
+f.Intrinsic.String.Build("{0}!*!O!*!{1}",v.Global.sOrder,v.Local.sPath,v.Local.sParam)
+F.Global.General.CallWrapperSync(7020,v.Local.sParam)
+
+'Get Order Line just uploaded
+f.Intrinsic.String.Build("Select Max(Record_No) from Order_Lines where Order_No = '{0}' and Part = '{1}' and Record_No >= '1000'",V.Global.sOrder,"PROGRESS",V.Local.sSQL)
+
+F.Intrinsic.Control.If(V.Global.bSqlOpen,=,False)
+	F.ODBC.Connection!Con.OpenCompanyConnection
+	V.Global.bSqlOpen.Set(True)
+F.Intrinsic.Control.EndIf
+
+f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSQL,v.Local.sRet)
+
+f.Intrinsic.String.Build("Update Order_Lines set GL_Account = '{2}', UM_Inventory = 'EA',Flag_Billing_Price = 'N',Flag_Purchased = 'N',Lotbin_Flg = 'N',Apply_Matl_schrg = 'N',Flag_data_cnv = '',  Flag_Cogs = 'N',Flag_Bom = '', Description = '{3}' where Order_NO = '{0}' and Record_No = '{1}'",v.Global.sOrder,v.Local.sRet,V.Screen.Form!txtARAcct.Text,V.Local.sDesc.Trim,v.Local.sSQL)
+f.ODBC.Connection!con.Execute(v.Local.sSQL)
+	
+F.Data.DataTable.CreateFromSQL("PriorSave","Con","Select Order_NO, Record_No, Prog_Line, Part, Percentage, Bill_Amt, AR_Account From GCG_6478_Prior_Prog Where Order_NO = '-1'",True)
+
+F.Intrinsic.Control.For(v.Local.i,0,V.DataTable.dtPB.RowCount--,1)
+	F.Data.DataTable.AddRow("PriorSave","Order_No",V.Global.sOrder.Trim,"Record_No",V.DataTable.dtPB(V.Local.i).Record_No!FieldValTrim,"Prog_Line",V.Local.sRet.Trim,"Part",V.DataTable.dtPB(V.Local.i).Part!FieldValTrim,"Percentage",V.DataTable.dtPB(V.Local.i).Current_PB_Pct!FieldVal,"Bill_Amt",V.DataTable.dtPB(V.Local.i).Current_PB_Amt!FieldValFloat,"AR_Account",V.Screen.Form!txtARAcct.Text)
+F.Intrinsic.Control.Next(V.Local.i)
+
+F.Intrinsic.Control.If(V.DataTable.PriorSave.RowCount--,<>,-1)
+	F.Data.DataTable.SaveToDB("PriorSave","con","GCG_6478_Prior_Prog","Order_No*!*Record_No*!*Prog_Line",3)
+F.Intrinsic.Control.EndIf
+F.Data.DataTable.Close("PriorSave")
+
+F.Intrinsic.Control.If(V.Global.bSqlOpen)
+	F.ODBC.Connection!Con.Close
+	V.Global.bSqlOpen.Set(False)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.CallSub(Get_Data)
+
+Gui.Form.txtItem.Text("")
+
+Gui.Form..Enabled(True)
+
+f.Intrinsic.UI.CloseWaitDialog
+	
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdGenerate_Click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	F.Intrinsic.String.Build("Project: GCG_6478_Progress_Billing.g2u {0}{0}Subroutine: {1}{0}Error Occurred {2} with description {3}",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form_Unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.cmdGenerate_Click.End
+
+Program.Sub.txtItem_LostFocus.Start
+F.Intrinsic.Control.SetErrorHandler("txtItem_LostFocus_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String,"")
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("txtItem_LostFocus_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	F.Intrinsic.String.Build("Project: GCG_6478_Progress_Billing.g2u {0}{0}Subroutine: {1}{0}Error Occurred {2} with description {3}",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form_Unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.txtItem_LostFocus.End
+
+Program.Sub.txtItem_GotFocus.Start
+F.Intrinsic.Control.SetErrorHandler("txtItem_GotFocus_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String,"")
+
+F.Intrinsic.Control.CallSub(GsGridProg_MouseCellExit)
+
+Gui.Form.txtItem.SelectAll
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("txtItem_GotFocus_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	F.Intrinsic.String.Build("Project: GCG_6478_Progress_Billing.g2u {0}{0}Subroutine: {1}{0}Error Occurred {2} with description {3}",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form_Unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.txtItem_GotFocus.End
+
+Program.Sub.txtPrecentBill_GotFocus.Start
+F.Intrinsic.Control.SetErrorHandler("txtPrecentBill_GotFocus_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String,"")
+
+F.Intrinsic.Control.CallSub(GsGridProg_MouseCellExit)
+
+Gui.Form.txtPrecentBill.SelectAll
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("txtPrecentBill_GotFocus_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	F.Intrinsic.String.Build("Project: GCG_6478_Progress_Billing.g2u {0}{0}Subroutine: {1}{0}Error Occurred {2} with description {3}",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form_Unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.txtPrecentBill_GotFocus.End
+
+Program.Sub.txtPrecentBill_LostFocus.Start
+F.Intrinsic.Control.SetErrorHandler("txtPrecentBill_LostFocus_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String,"")
+V.Local.fPercent.Declare(Float,0)
+
+F.Intrinsic.Control.If(V.DataTable.dtPB.RowCount--,<>,-1)
+	F.Intrinsic.Math.Abs(V.Screen.Form!txtPrecentBill.Text,V.Local.fPercent)
+	F.Intrinsic.Control.If(V.Local.fPercent,>=,0)
+		Gui.Form.txtPrecentBill.Text(V.Local.fPercent)
+		F.Data.DataTable.SetValue("dtPB",-1,"Current_PB_Pct",V.Local.fPercent)
+		Gui.Form.txtTotInvoice.Text(V.DataTable.dtPB(V.DataTable.dtPB.RowCount--).Sum_Current_PB_Amt!FieldValFloat)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Bill Percent Needs to be >= 0","Attention")
+		Gui.Form.txtTotInvoice.Text("0")
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Else
+	Gui.Form.txtPrecentBill.Text("0")
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("txtPrecentBill_LostFocus_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	F.Intrinsic.String.Build("Project: GCG_6478_Progress_Billing.g2u {0}{0}Subroutine: {1}{0}Error Occurred {2} with description {3}",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form_Unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.txtPrecentBill_LostFocus.End
+
+Program.Sub.txtTotInvoice_GotFocus.Start
+F.Intrinsic.Control.SetErrorHandler("txtTotInvoice_GotFocus_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String,"")
+
+F.Intrinsic.Control.CallSub(GsGridProg_MouseCellExit)
+
+Gui.Form.txtTotInvoice.SelectAll
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("txtTotInvoice_GotFocus_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	F.Intrinsic.String.Build("Project: GCG_6478_Progress_Billing.g2u {0}{0}Subroutine: {1}{0}Error Occurred {2} with description {3}",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form_Unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.txtTotInvoice_GotFocus.End
+
+Program.Sub.txtTotInvoice_LostFocus.Start
+F.Intrinsic.Control.SetErrorHandler("txtTotInvoice_LostFocus_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String,"")
+V.Local.fValue.Declare(Float,0)
+
+F.Intrinsic.Control.BlockEvents
+
+F.Intrinsic.Control.If(V.DataTable.dtPB.RowCount--,<>,-1)
+	F.Intrinsic.Math.Abs(V.Screen.Form!txtTotInvoice.Text,V.Local.fValue)
+	Gui.Form.txtTotInvoice.Text(V.Local.fValue)
+	F.Intrinsic.Control.If(V.Local.fValue,>,0)
+		F.Intrinsic.Math.Div(V.Local.fValue,V.DataTable.dtPB(V.DataTable.dtPB.RowCount--).Sum_Extension!FieldValFloat,V.Local.fValue)
+		F.Intrinsic.Math.Mult(V.Local.fValue,100,V.Local.fValue)
+		Gui.Form.txtPrecentBill.Text(V.Local.fValue)
+		F.Data.DataTable.SetValue("dtPB",-1,"Current_PB_Pct",V.Local.fValue)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Else
+	Gui.Form.txtTotInvoice.Text("0")
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.UnBlockEvents
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("txtTotInvoice_LostFocus_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	F.Intrinsic.String.Build("Project: GCG_6478_Progress_Billing.g2u {0}{0}Subroutine: {1}{0}Error Occurred {2} with description {3}",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form_Unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.txtTotInvoice_LostFocus.End
+
+Program.Sub.GsGridProg_MouseCellExit.Start
+F.Intrinsic.Control.SetErrorHandler("GsGridProg_MouseCellExit_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String,"")
+
+F.Intrinsic.Control.If(V.DataTable.dtPB.RowCount--,<>,-1)
+	GUI.Form.txtTotInvoice.Text(V.DataTable.dtPB(V.DataTable.dtPB.RowCount--).Sum_Current_PB_Amt!FieldValFloat)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("GsGridProg_MouseCellExit_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	F.Intrinsic.String.Build("Project: GCG_6417_Progress_Billing.g2u {0}{0}Subroutine: {1}{0}Error Occurred {2} with description {3}",V.Ambient.NewLine,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form_Unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.GsGridProg_MouseCellExit.End
+
+Program.Sub.Comments.Start
+${$5$}$3.0.0.0$}$1
+${$6$}$rking$}$20210818093638628$}$QNdZLVy4bWuiWa9jh1ZTiCjCxrZcr9BSfT/lZHG7dDs52eym7EK+BQXB4oWMuMPo7dyf9P07hpE=
+Program.Sub.Comments.End
